@@ -12,6 +12,7 @@ import {
   CartDetails,
   PayPrompt,
   PayCompleted,
+  PhoneLogin,
   // Playground,
   // TestCart
   // CreateProduct,
@@ -98,6 +99,11 @@ const routes = [
   {
     path: '/pay-completed',
     component: PayCompleted,
+  },
+  {
+    path: '/phone-login',
+    component: PhoneLogin,
+    hidden: true,
   }
   // {
   //   path: '/create-product',

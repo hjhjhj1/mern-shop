@@ -28,6 +28,7 @@ import routes, {
   ConfirmOrder,
   PayPrompt,
   UserCenter,
+  PhoneLogin,
 } from './routes'
 
 import ScrollToTop from './components/ScrollToTop'
@@ -314,9 +315,17 @@ class App extends ItemList {
           )} />
           <Route path="/pay-prompt" component={PayPrompt} />
           {/* Other Routes */}
-          {routes.map((route, idx) => (route && route.hidden ? (null) : (
-            <Route key={idx} {...route} />
-          )))}
+          {routes.map((route, idx) => {
+            if (route && route.hidden) return null;
+            if (route.path === '/phone-login') {
+              return (
+                <Route key={idx} path={route.path} render={props => (
+                  <PhoneLogin {...props} login={this.login} isLogined={logined} />
+                )} />
+              );
+            }
+            return <Route key={idx} {...route} />;
+          })}
         </div>
         <Footer />
       </div>
