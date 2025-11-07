@@ -93,6 +93,15 @@ class Signin extends React.Component {
               </FormGroup>
               <Button className="btn btn-primary login-btn" type="submit" style={{ display: 'block', width: '100%' }}>登&nbsp;录</Button>
             </Form>
+            
+            <div className="phone-login-link" style={{ marginTop: 20, textAlign: 'center' }}>
+              <Link to={{ 
+                pathname: '/phone-login', 
+                state: { from: this.props.location.state || { from: {pathname: '/' } } } 
+              }}>
+                <Icon type="mobile" /> 手机验证码登录
+              </Link>
+            </div>
           </div>
         </div>
       </div>
