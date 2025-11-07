@@ -1,6 +1,7 @@
 import React from 'react'
 import { Popover, Icon, Menu } from 'antd'
 import { Link, withRouter } from 'react-router-dom'
+import SearchBox from '../SearchBox/SearchBox'
 // import { cart, cartAPI } from '../fakeData/mock-cart'
 
 import './Header.css'
@@ -20,7 +21,14 @@ const Header = ({ logined, cart, app, term }) => {
           </div>
         </div>
         <div className="middle-box">
-          <SearchBar term={term} history={app.props.history} />
+          <SearchBox
+            onSearch={(keyword) => {
+              let url = '/product-show' + (keyword ? '/search?keyword=' + encodeURI(keyword) : '')
+              app.props.history.push(url, { term: keyword })
+            }}
+            hotKeywords={['手机', '电脑', '平板', '耳机', '相机']}
+            enableHistory={true}
+          />
         </div>
         <div className="right-box">
           {!logined && (
@@ -56,41 +64,7 @@ const Header = ({ logined, cart, app, term }) => {
   )
 }
 
-class SearchBar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      term: ''
-    }
-  }
-  componentWillReceiveProps(nextProps) {
-    this.setState({ term: nextProps.term })
-  }
-  render() {
-    let { term } = this.state
-    return (
-      <form className="search-bar" style={{
-        width: 400,
-        position: 'relative',
-        zIndex: '9999',
-      }}>
-        {/*
-          <input type="text" value={app.state.inputedTerm} onChange={(e) => { app.setState({ inputedTerm: e.target.value }) }} />
-          <input type="text" defaultValue={_term} value={term} onChange={(e) => { term = e.target.value }} />
-        */}
-        <input type="text" value={term} onChange={(e) => { this.setState({ term: e.target.value }) }}/>
-        <button onClick={(e) => {
-          e.preventDefault()
-          let url = '/product-show' + (term ? '/search?keyword=' + encodeURI(term) : '')
-          this.props.history.push(url, { term: term })
-        }}><Icon type="search" style={{ fontSize: 18 }} /></button>
-        {/*
-        <button className="icon">搜&nbsp;索</button>
-        */}
-      </form>
-    )
-  }
-}
+
 
 /*
   暂时使用全局变量

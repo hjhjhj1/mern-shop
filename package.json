@@ -8,7 +8,7 @@
     "build": "npm run build-css && npm run build-js && npm run move:public",
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
-    "start-js": "react-app-rewired start",
+    "start-js": "set PORT=3001 && react-app-rewired start",
     "build-js": "react-app-rewired build",
     "server": "nodemon -w server ./server/server.js",
     "watch": "gulp watch",
